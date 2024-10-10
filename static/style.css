@@ -1,0 +1,15 @@
+body{
+    background-color: aquamarine;
+}
+
+h1{
+    border:2px solid black;
+    display: flex;
+    text-align: center;
+    font-family: sans-serif;
+    color:red;
+    width:100vw;
+    align-items: center; 
+    justify-content: center; 
+    font-weight: bold;
+}
