@@ -7,18 +7,6 @@ def calculate_age(dob):
     birth_date = datetime.strptime(dob, "%Y-%m-%d")
     age = today.year - birth_date.year - ((today.month, today.day) < (birth_date.month, birth_date.day))
     return age
-app = Flask(__name__)
-
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    if request.method == 'POST':
-        name = request.form['name']
-        dob = request.form['dob']
-        age = calculate_age(dob)
-        zodiac = get_zodiac_sign(dob)
-        message = f"Welcome, {name}! You are {age} years old. Your zodiac sign is {zodiac}."
-        return render_template('result.html', message=message)
-    return render_template('index.html')
 
 def get_zodiac_sign(dob):
     month, day = map(int, dob.split('-')[1:])
@@ -31,3 +19,18 @@ def get_zodiac_sign(dob):
     for m, d, sign in zodiac_signs:
         if (month, day) <= (m, d):
             return sign
+app = Flask(__name__)
+
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        name = request.form['name']
+        dob = request.form['dob']
+        age = calculate_age(dob)
+        zodiac = get_zodiac_sign(dob)
+        message = f"Welcome, {name}! You are {age} years old. Your zodiac sign is {zodiac}."
+        return render_template('result.html', message=message)
+    return render_template('index.html')
+if __name__=='__main__':
+    app.run(debug=True)
